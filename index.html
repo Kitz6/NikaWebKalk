@@ -10,6 +10,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
+<!-- APP.JS mora biti defer da se DOM učita prije skripte -->
+<script defer src="app.js"></script>
+
 </head>
 <body>
 
@@ -58,15 +61,55 @@
     <h2>Konfiguracija – <span id="selectedTypeLabel"></span></h2>
 
     <div class="input-group">
-      <label>Širina (m):</label>
+      <label>Širina ograde (m):</label>
       <input type="number" id="sirina" step="0.1">
     </div>
 
     <div class="input-group">
-      <label>Visina (m):</label>
+      <label>Visina ograde (m):</label>
       <input type="number" id="visina" step="0.1">
     </div>
 
+    <!-- ULazna vrata -->
+    <h3>Ulazna vrata</h3>
+
+    <div class="input-group">
+      <label>Širina ulaznih vrata (m):</label>
+      <input type="number" id="ulaznaSirina" step="0.1">
+    </div>
+
+    <div class="input-group">
+      <label>Visina ulaznih vrata (m):</label>
+      <input type="number" id="ulaznaVisina" step="0.1">
+    </div>
+
+    <!-- Klizna vrata -->
+    <h3>Klizna vrata</h3>
+
+    <div class="input-group">
+      <label>Dužina kliznih vrata (m):</label>
+      <input type="number" id="kliznaDuzina" step="0.1">
+    </div>
+
+    <div class="input-group">
+      <label>Visina kliznih vrata (m):</label>
+      <input type="number" id="kliznaVisina" step="0.1">
+    </div>
+
+    <!-- RAL BOJA -->
+    <div class="input-group">
+      <label>RAL boja:</label>
+      <select id="ralBoja">
+        <option value="">Odaberite boju</option>
+        <option value="RAL 7016">RAL 7016</option>
+        <option value="RAL 9005">RAL 9005</option>
+        <option value="RAL 9010">RAL 9010</option>
+        <option value="RAL 7024">RAL 7024</option>
+        <option value="RAL 8017">RAL 8017</option>
+      </select>
+    </div>
+
+    <!-- Tip montaže -->
     <div class="input-group">
       <label>Tip montaže:</label>
       <select id="montaza">
@@ -110,7 +153,7 @@
     <button class="secondary-btn" onclick="goBackToTypes()">Natrag</button>
   </div>
 
-  <!-- SCREEN PERGOLA -->
+    <!-- SCREEN PERGOLA -->
   <div id="screenPergola" class="hidden">
     <h2>Pergola – konfiguracija</h2>
 
@@ -132,6 +175,18 @@
     <div class="input-group">
       <label>Visina stupova (m):</label>
       <input type="number" id="pergVisinaStupova" step="0.1">
+    </div>
+
+    <div class="input-group">
+     <label>RAL boja:</label>
+     <select id="pergRal">
+      <option value="">Odaberite boju</option>
+      <option value="RAL 7016">RAL 7016</option>
+      <option value="RAL 9005">RAL 9005</option>
+      <option value="RAL 9010">RAL 9010</option>
+      <option value="RAL 7024">RAL 7024</option>
+      <option value="RAL 8017">RAL 8017</option>
+     </select>
     </div>
 
     <div class="input-group">
@@ -202,6 +257,18 @@
     </div>
 
     <div class="input-group">
+     <label>RAL boja:</label>
+     <select id="nadRal">
+      <option value="">Odaberite boju</option>
+      <option value="RAL 7016">RAL 7016</option>
+      <option value="RAL 9005">RAL 9005</option>
+      <option value="RAL 9010">RAL 9010</option>
+      <option value="RAL 7024">RAL 7024</option>
+      <option value="RAL 8017">RAL 8017</option>
+     </select>
+    </div>
+
+    <div class="input-group">
       <label>Tip montaže:</label>
       <select id="nadMontaza">
         <option value="dvorišna">Dvorišna</option>
@@ -246,6 +313,5 @@
 
 </div>
 
-<script src="app.js"></script>
 </body>
 </html>
