@@ -273,6 +273,9 @@ Površina: ${povrsina.toFixed(2)} m²
 Broj stupova: ${stupovi}
 Visina stupova: ${visinaStupova} m
 
+Tip montaže: ${montazaVal}
+Udaljenost: ${kmVal} km
+
 Osnovica: €${osnovica.toFixed(2)}
 PDV 25%: €${pdv.toFixed(2)}
 Ukupno: €${ukupno.toFixed(2)}
@@ -337,6 +340,9 @@ Površina: ${povrsina.toFixed(2)} m²
 
 Broj stupova: ${stupovi}
 Visina stupova: ${visinaStupova} m
+
+Tip montaže: ${montazaVal}
+Udaljenost: ${kmVal} km
 
 Osnovica: €${osnovica.toFixed(2)}
 PDV 25%: €${pdv.toFixed(2)}
