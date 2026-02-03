@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<title>Konfigurator ograda</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- PDFMAKE -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Konfigurator ograda</h1>
+
+  <!-- SCREEN 1 -->
+  <div id="screen1">
+    <h2>Odaberite kategoriju proizvoda</h2>
+
+    <div class="grid grid-categories">
+
+      <div class="card" onclick="selectCategory('aluminijske')">
+        <img src="img/placeholder2.jpg">
+        <h3>Aluminijske ograde</h3>
+      </div>
+
+      <div class="card" onclick="selectCategory('laserske')">
+        <img src="img/placeholder1.jpg">
+        <h3>Laserski rezane ograde</h3>
+      </div>
+
+      <div class="card" onclick="selectCategory('pergola')">
+        <img src="img/placeholder3.jpg">
+        <h3>Pergole</h3>
+      </div>
+
+      <div class="card" onclick="selectCategory('nadstresnica')">
+        <img src="img/placeholder4.jpg">
+        <h3>Nadstrešnice</h3>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCREEN 2 -->
+  <div id="screen2" class="hidden">
+    <h2>Odaberite model</h2>
+    <div class="grid" id="typeGrid"></div>
+    <button class="secondary-btn" onclick="goBack()">Natrag</button>
+  </div>
+
+  <!-- SCREEN 3 -->
+  <div id="screen3" class="hidden">
+    <h2>Konfiguracija – <span id="selectedTypeLabel"></span></h2>
+
+    <div class="input-group">
+      <label>Širina (m):</label>
+      <input type="number" id="sirina" step="0.1">
+    </div>
+
+    <div class="input-group">
+      <label>Visina (m):</label>
+      <input type="number" id="visina" step="0.1">
+    </div>
+
+    <div class="input-group">
+      <label>Tip montaže:</label>
+      <select id="montaza">
+        <option value="dvorišna">Dvorišna</option>
+        <option value="balkonska">Balkonska</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Udaljenost (km):</label>
+      <input type="number" id="kilometri" step="0.1">
+    </div>
+
+    <h3>Podaci o kupcu</h3>
+
+    <div class="input-group">
+      <label>Ime i prezime:</label>
+      <input type="text" id="kupacIme">
+    </div>
+
+    <div class="input-group">
+      <label>Adresa:</label>
+      <input type="text" id="kupacAdresa">
+    </div>
+
+    <div class="input-group">
+      <label>OIB:</label>
+      <input type="text" id="kupacOIB">
+    </div>
+
+    <div class="input-group">
+      <label>Napomena kupca:</label>
+      <textarea id="kupacNapomena" rows="3"></textarea>
+    </div>
+
+    <button onclick="calculate()">Izračunaj ponudu</button>
+
+    <div id="result" class="result hidden"></div>
+    <button id="pdfBtn" class="hidden" onclick="downloadPDF()">Preuzmi PDF</button>
+
+    <button class="secondary-btn" onclick="goBackToTypes()">Natrag</button>
+  </div>
+
+  <!-- SCREEN PERGOLA -->
+  <div id="screenPergola" class="hidden">
+    <h2>Pergola – konfiguracija</h2>
+
+    <div class="input-group">
+      <label>Dužina (m):</label>
+      <input type="number" id="pergDuzina" step="0.1">
+    </div>
+
+    <div class="input-group">
+      <label>Širina (m):</label>
+      <input type="number" id="pergSirina" step="0.1">
+    </div>
+
+    <div class="input-group">
+      <label>Broj stupova:</label>
+      <input type="number" id="pergStupovi" step="1">
+    </div>
+
+    <div class="input-group">
+      <label>Visina stupova (m):</label>
+      <input type="number" id="pergVisinaStupova" step="0.1">
+    </div>
+
+    <div class="input-group">
+      <label>Tip montaže:</label>
+      <select id="pergMontaza">
+        <option value="dvorišna">Dvorišna</option>
+        <option value="balkonska">Balkonska</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Udaljenost (km):</label>
+      <input type="number" id="pergKilometri" step="0.1">
+    </div>
+
+    <h3>Podaci o kupcu</h3>
+
+    <div class="input-group">
+      <label>Ime i prezime:</label>
+      <input type="text" id="pergKupacIme">
+    </div>
+
+    <div class="input-group">
+      <label>Adresa:</label>
+      <input type="text" id="pergKupacAdresa">
+    </div>
+
+    <div class="input-group">
+      <label>OIB:</label>
+      <input type="text" id="pergKupacOIB">
+    </div>
+
+    <div class="input-group">
+      <label>Napomena kupca:</label>
+      <textarea id="pergKupacNapomena" rows="3"></textarea>
+    </div>
+
+    <button onclick="calculatePergola()">Izračunaj ponudu</button>
+
+    <div id="pergResult" class="result hidden"></div>
+    <button id="pergPdfBtn" class="hidden" onclick="downloadPDF()">Preuzmi PDF</button>
+
+    <button class="secondary-btn" onclick="location.reload()">Natrag</button>
+  </div>
+
+  <!-- SCREEN NADSTREŠNICA -->
+  <div id="screenNadstresnica" class="hidden">
+    <h2>Nadstrešnica – konfiguracija</h2>
+
+    <div class="input-group">
+      <label>Dužina (m):</label>
+      <input type="number" id="nadDuzina" step="0.1">
+    </div>
+
+    <div class="input-group">
+      <label>Širina (m):</label>
+      <input type="number" id="nadSirina" step="0.1">
+    </div>
+
+    <div class="input-group">
+      <label>Broj stupova:</label>
+      <input type="number" id="nadStupovi" step="1">
+    </div>
+
+    <div class="input-group">
+      <label>Visina stupova (m):</label>
+      <input type="number" id="nadVisinaStupova" step="0.1">
+    </div>
+
+    <div class="input-group">
+      <label>Tip montaže:</label>
+      <select id="nadMontaza">
+        <option value="dvorišna">Dvorišna</option>
+        <option value="balkonska">Balkonska</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Udaljenost (km):</label>
+      <input type="number" id="nadKilometri" step="0.1">
+    </div>
+
+    <h3>Podaci o kupcu</h3>
+
+    <div class="input-group">
+      <label>Ime i prezime:</label>
+      <input type="text" id="nadKupacIme">
+    </div>
+
+    <div class="input-group">
+      <label>Adresa:</label>
+      <input type="text" id="nadKupacAdresa">
+    </div>
+
+    <div class="input-group">
+      <label>OIB:</label>
+      <input type="text" id="nadKupacOIB">
+    </div>
+
+    <div class="input-group">
+      <label>Napomena kupca:</label>
+      <textarea id="nadKupacNapomena" rows="3"></textarea>
+    </div>
+
+    <button onclick="calculateNadstresnica()">Izračunaj ponudu</button>
+
+    <div id="nadResult" class="result hidden"></div>
+    <button id="nadPdfBtn" class="hidden" onclick="downloadPDF()">Preuzmi PDF</button>
+
+    <button class="secondary-btn" onclick="location.reload()">Natrag</button>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
