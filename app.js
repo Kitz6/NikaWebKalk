@@ -825,11 +825,7 @@ function downloadPDF() {
       ["Visina", lastOfferData.visinaVal + " m"],
       ["Površina", lastOfferData.kvadratura.toFixed(2) + " m²"],
       ["Iznos ograde", lastOfferData.iznosOgrade.toFixed(2) + " €"],
-      ["RAL boja", lastOfferData.ralBojaVal],
-      ["Tip montaže", lastOfferData.montazaVal],
-      ["Udaljenost", lastOfferData.kmVal + " km"],
-      ["Montaža", lastOfferData.cijenaMontaze.toFixed(2) + " €"],
-      ["Udaljenost (trošak)", lastOfferData.cijenaUdaljenosti.toFixed(2) + " €"]
+      
     ];
 
     /* ---------------- VRATA – DETALJNI PRIKAZ ---------------- */
@@ -861,6 +857,12 @@ function downloadPDF() {
       tableBody.push(["Samonosiva vrata – površina", lastOfferData.samonosiva.povrsina.toFixed(2) + " m²"]);
       tableBody.push(["Samonosiva vrata – cijena", lastOfferData.samonosiva.cijena.toFixed(2) + " €"]);
     }
+
+    tableBody.push(["RAL boja", lastOfferData.ralBojaVal]);
+    tableBody.push(["Tip montaže", lastOfferData.montazaVal]);
+    tableBody.push(["Udaljenost", lastOfferData.kmVal + " km"]);
+    tableBody.push(["Montaža", lastOfferData.cijenaMontaze.toFixed(2) + " €"]);
+    tableBody.push(["Udaljenost (trošak)", lastOfferData.cijenaUdaljenosti.toFixed(2) + " €"]);
 
   }
 
