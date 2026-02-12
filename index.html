@@ -10,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
-<!-- APP.JS mora biti defer da se DOM učita prije skripte -->
+<!-- APP.JS -->
 <script defer src="app.js"></script>
 
 </head>
@@ -27,22 +27,22 @@
     <div class="grid-categories">
 
       <div class="card" onclick="selectCategory('aluminijske')">
-        <img src="./img/placeholder2.jpg">
+        <img src="img/placeholder2.jpg">
         <h3>Aluminijske ograde</h3>
       </div>
 
       <div class="card" onclick="selectCategory('laserske')">
-        <img src="./img/placeholder1.jpg">
+        <img src="img/placeholder1.jpg">
         <h3>Laserski rezane ograde</h3>
       </div>
 
       <div class="card" onclick="selectCategory('pergola')">
-        <img src="./img/placeholder3.jpg">
+        <img src="img/placeholder3.jpg">
         <h3>Pergole</h3>
       </div>
 
       <div class="card" onclick="selectCategory('nadstresnica')">
-        <img src="./img/placeholder4.jpg">
+        <img src="img/placeholder4.jpg">
         <h3>Nadstrešnice</h3>
       </div>
 
@@ -56,7 +56,7 @@
     <button class="secondary-btn" onclick="goBack()">Natrag</button>
   </div>
 
-  <!-- SCREEN 3 -->
+  <!-- SCREEN 3 – OGRADE -->
   <div id="screen3" class="hidden">
     <h2>Konfiguracija – <span id="selectedTypeLabel"></span></h2>
 
@@ -70,33 +70,76 @@
       <input type="number" id="visina" step="0.1">
     </div>
 
-    <!-- ULazna vrata -->
-    <h3>Ulazna vrata</h3>
+    <hr>
+    <h3>Vrata</h3>
 
-    <div class="input-group">
-      <label>Širina ulaznih vrata (m):</label>
-      <input type="number" id="ulaznaSirina" step="0.1">
+    <!-- JEDNOKRILNA -->
+    <div class="input-group checkbox-group">
+      <label><input type="checkbox" id="chkJednokrilna"> Jednokrilna vrata</label>
     </div>
 
-    <div class="input-group">
-      <label>Visina ulaznih vrata (m):</label>
-      <input type="number" id="ulaznaVisina" step="0.1">
+    <div id="jednokrilnaFields" class="hidden">
+      <div class="input-group">
+        <label>Širina (m):</label>
+        <input type="number" id="jednokrilnaSirina" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>Visina (m):</label>
+        <input type="number" id="jednokrilnaVisina" step="0.1">
+      </div>
     </div>
 
-    <!-- Klizna vrata -->
-    <h3>Klizna vrata</h3>
-
-    <div class="input-group">
-      <label>Dužina kliznih vrata (m):</label>
-      <input type="number" id="kliznaDuzina" step="0.1">
+    <!-- DVOKRILNA -->
+    <div class="input-group checkbox-group">
+      <label><input type="checkbox" id="chkDvokrilna"> Dvokrilna vrata</label>
     </div>
 
-    <div class="input-group">
-      <label>Visina kliznih vrata (m):</label>
-      <input type="number" id="kliznaVisina" step="0.1">
+    <div id="dvokrilnaFields" class="hidden">
+      <div class="input-group">
+        <label>Širina (m):</label>
+        <input type="number" id="dvokrilnaSirina" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>Visina (m):</label>
+        <input type="number" id="dvokrilnaVisina" step="0.1">
+      </div>
     </div>
 
-    <!-- RAL BOJA -->
+    <!-- KLIZNA -->
+    <div class="input-group checkbox-group">
+      <label><input type="checkbox" id="chkKlizna"> Klizna vrata</label>
+    </div>
+
+    <div id="kliznaFields" class="hidden">
+      <div class="input-group">
+        <label>Dužina (m):</label>
+        <input type="number" id="kliznaDuzina" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>Visina (m):</label>
+        <input type="number" id="kliznaVisina" step="0.1">
+      </div>
+    </div>
+
+    <!-- SAMONOSIVA -->
+    <div class="input-group checkbox-group">
+      <label><input type="checkbox" id="chkSamonosiva"> Samonosiva vrata</label>
+    </div>
+
+    <div id="samonosivaFields" class="hidden">
+      <div class="input-group">
+        <label>Dužina (m):</label>
+        <input type="number" id="samonosivaDuzina" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>Visina (m):</label>
+        <input type="number" id="samonosivaVisina" step="0.1">
+      </div>
+    </div>
+
+    <hr>
+
+        <!-- RAL -->
     <div class="input-group">
       <label>RAL boja:</label>
       <select id="ralBoja">
@@ -109,7 +152,7 @@
       </select>
     </div>
 
-    <!-- Tip montaže -->
+    <!-- MONTAŽA -->
     <div class="input-group">
       <label>Tip montaže:</label>
       <select id="montaza">
@@ -153,7 +196,7 @@
     <button class="secondary-btn" onclick="goBackToTypes()">Natrag</button>
   </div>
 
-    <!-- SCREEN PERGOLA -->
+  <!-- SCREEN PERGOLA -->
   <div id="screenPergola" class="hidden">
     <h2>Pergola – konfiguracija</h2>
 
@@ -178,15 +221,23 @@
     </div>
 
     <div class="input-group">
-     <label>RAL boja:</label>
-     <select id="pergRal">
-      <option value="">Odaberite boju</option>
-      <option value="RAL 7016">RAL 7016</option>
-      <option value="RAL 9005">RAL 9005</option>
-      <option value="RAL 9010">RAL 9010</option>
-      <option value="RAL 7024">RAL 7024</option>
-      <option value="RAL 8017">RAL 8017</option>
-     </select>
+      <label>Motor:</label>
+      <select id="pergMotor">
+        <option value="bez">Bez motora</option>
+        <option value="sa">S motorom</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>RAL boja:</label>
+      <select id="pergRal">
+        <option value="">Odaberite boju</option>
+        <option value="RAL 7016">RAL 7016</option>
+        <option value="RAL 9005">RAL 9005</option>
+        <option value="RAL 9010">RAL 9010</option>
+        <option value="RAL 7024">RAL 7024</option>
+        <option value="RAL 8017">RAL 8017</option>
+      </select>
     </div>
 
     <div class="input-group">
@@ -257,15 +308,15 @@
     </div>
 
     <div class="input-group">
-     <label>RAL boja:</label>
-     <select id="nadRal">
-      <option value="">Odaberite boju</option>
-      <option value="RAL 7016">RAL 7016</option>
-      <option value="RAL 9005">RAL 9005</option>
-      <option value="RAL 9010">RAL 9010</option>
-      <option value="RAL 7024">RAL 7024</option>
-      <option value="RAL 8017">RAL 8017</option>
-     </select>
+      <label>RAL boja:</label>
+      <select id="nadRal">
+        <option value="">Odaberite boju</option>
+        <option value="RAL 7016">RAL 7016</option>
+        <option value="RAL 9005">RAL 9005</option>
+        <option value="RAL 9010">RAL 9010</option>
+        <option value="RAL 7024">RAL 7024</option>
+        <option value="RAL 8017">RAL 8017</option>
+      </select>
     </div>
 
     <div class="input-group">
@@ -313,6 +364,24 @@
 
 </div>
 
-</body>
+<!-- AUTOMATSKO PRIKAZIVANJE/SKRIVANJE POLJA VRATA -->
+<script>
+document.getElementById("chkJednokrilna").addEventListener("change", () => {
+  document.getElementById("jednokrilnaFields").classList.toggle("hidden");
+});
 
+document.getElementById("chkDvokrilna").addEventListener("change", () => {
+  document.getElementById("dvokrilnaFields").classList.toggle("hidden");
+});
+
+document.getElementById("chkKlizna").addEventListener("change", () => {
+  document.getElementById("kliznaFields").classList.toggle("hidden");
+});
+
+document.getElementById("chkSamonosiva").addEventListener("change", () => {
+  document.getElementById("samonosivaFields").classList.toggle("hidden");
+});
+</script>
+
+</body>
 </html>
