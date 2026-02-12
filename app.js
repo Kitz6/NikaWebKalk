@@ -602,9 +602,11 @@ Kupac: ${kupacImeVal}
 Adresa: ${kupacAdresaVal}
 OIB: ${kupacOIBVal}
 
-Dužina: ${duzina} m
-Širina: ${sirina} m
-Površina: ${povrsina.toFixed(2)} m²
+PERGOLA:
+  Dužina: ${duzina} m
+  Širina: ${sirina} m
+  Površina: ${povrsina.toFixed(2)} m²
+  Cijena pergole: €${cijenaPovrsine.toFixed(2)}
 
 Broj stupova: ${stupovi}
 Visina stupova: ${visinaStupova} m
@@ -695,9 +697,11 @@ Kupac: ${kupacImeVal}
 Adresa: ${kupacAdresaVal}
 OIB: ${kupacOIBVal}
 
-Dužina: ${duzina} m
-Širina: ${sirina} m
-Površina: ${povrsina.toFixed(2)} m²
+NADSTREŠNICA:
+  Dužina: ${duzina} m
+  Širina: ${sirina} m
+  Površina: ${povrsina.toFixed(2)} m²
+  Cijena nadstrešnice: €${cijenaPovrsine.toFixed(2)}
 
 Broj stupova: ${stupovi}
 Visina stupova: ${visinaStupova} m
