@@ -1,6 +1,5 @@
 /* ---------------------------------------------------------
-   KONFIGURACIJA CIJENA – PROŠIRENI STARI SUSTAV
-   (popuni vrijednosti umjesto 0)
+   KONFIGURACIJA CIJENA
 --------------------------------------------------------- */
 
 /* Ograde – cijena po m² (dvorišna) */
@@ -21,7 +20,6 @@ const CijeneKvadratureBalkonska = {
   LAS06: 0, LAS07: 0, LAS08: 0, LAS09: 0, LAS10: 0
 };
 
-/* Vratata TE02,05,06,10 nemaju definiranu cijenu */
 /* Vrata – TE modeli (po m²) */
 const CijeneVrataTE = {
   jednokrilna: {
@@ -42,24 +40,12 @@ const CijeneVrataTE = {
   }
 };
 
-/* Vrata – LAS modeli (po m², jedna cijena po vrsti) */
+/* Vrata – LAS modeli */
 const CijeneVrataLAS = {
-  jednokrilna: {
-    LAS01: 0, LAS02: 0, LAS03: 0, LAS04: 0, LAS05: 0,
-    LAS06: 0, LAS07: 0, LAS08: 0, LAS09: 0, LAS10: 0
-  },
-  dvokrilna: {
-    LAS01: 0, LAS02: 0, LAS03: 0, LAS04: 0, LAS05: 0,
-    LAS06: 0, LAS07: 0, LAS08: 0, LAS09: 0, LAS10: 0
-  },
-  klizna: {
-    LAS01: 0, LAS02: 0, LAS03: 0, LAS04: 0, LAS05: 0,
-    LAS06: 0, LAS07: 0, LAS08: 0, LAS09: 0, LAS10: 0
-  },
-  samonosiva: {
-    LAS01: 0, LAS02: 0, LAS03: 0, LAS04: 0, LAS05: 0,
-    LAS06: 0, LAS07: 0, LAS08: 0, LAS09: 0, LAS10: 0
-  }
+  jednokrilna: { LAS01: 0, LAS02: 0, LAS03: 0, LAS04: 0, LAS05: 0, LAS06: 0, LAS07: 0, LAS08: 0, LAS09: 0, LAS10: 0 },
+  dvokrilna: { LAS01: 0, LAS02: 0, LAS03: 0, LAS04: 0, LAS05: 0, LAS06: 0, LAS07: 0, LAS08: 0, LAS09: 0, LAS10: 0 },
+  klizna:     { LAS01: 0, LAS02: 0, LAS03: 0, LAS04: 0, LAS05: 0, LAS06: 0, LAS07: 0, LAS08: 0, LAS09: 0, LAS10: 0 },
+  samonosiva: { LAS01: 0, LAS02: 0, LAS03: 0, LAS04: 0, LAS05: 0, LAS06: 0, LAS07: 0, LAS08: 0, LAS09: 0, LAS10: 0 }
 };
 
 /* Pergola */
@@ -86,8 +72,6 @@ const CijenaPoKilometru = 0.35;
 
 /* PDV */
 const PDV_STOPA = 0.25;
-
-
 
 /* ---------------------------------------------------------
    PODACI O FIRMI
@@ -318,21 +302,19 @@ function calculate() {
   const iznosOgrade = kvadratura * (cijenaKvadrature || 0);
 
   /* ---------------------------------------------------------
-     VRATA – priprema objekata (sve opcionalno)
+     VRATA – priprema objekata
   --------------------------------------------------------- */
 
   const jeTE = selectedType.startsWith("TE");
   const jeLAS = selectedType.startsWith("LAS");
 
   function vrataPovrsina(s, v) {
-    const sv = parseFloat(s) || 0;
-    const vv = parseFloat(v) || 0;
-    return sv * vv;
+    return (parseFloat(s) || 0) * (parseFloat(v) || 0);
   }
 
   /* ---------------- JEDNOKRILNA ---------------- */
   let jednokrilna = {
-    aktivno: !!(chkJednokrilna && chkJednokrilna.checked),
+    aktivno: chkJednokrilna?.checked || false,
     sirina: 0,
     visina: 0,
     povrsina: 0,
@@ -344,20 +326,14 @@ function calculate() {
     jednokrilna.visina = parseFloat(jednokrilnaVisina?.value) || 0;
     jednokrilna.povrsina = vrataPovrsina(jednokrilna.sirina, jednokrilna.visina);
 
-    if (jeTE) {
-      jednokrilna.cijena =
-        jednokrilna.povrsina *
-        (CijeneVrataTE.jednokrilna[selectedType] || 0);
-    } else if (jeLAS) {
-      jednokrilna.cijena =
-        jednokrilna.povrsina *
-        (CijeneVrataLAS.jednokrilna[selectedType] || 0);
-    }
+    jednokrilna.cijena =
+      jednokrilna.povrsina *
+      ((jeTE ? CijeneVrataTE.jednokrilna[selectedType] : CijeneVrataLAS.jednokrilna[selectedType]) || 0);
   }
 
   /* ---------------- DVOKRILNA ---------------- */
   let dvokrilna = {
-    aktivno: !!(chkDvokrilna && chkDvokrilna.checked),
+    aktivno: chkDvokrilna?.checked || false,
     sirina: 0,
     visina: 0,
     povrsina: 0,
@@ -369,20 +345,14 @@ function calculate() {
     dvokrilna.visina = parseFloat(dvokrilnaVisina?.value) || 0;
     dvokrilna.povrsina = vrataPovrsina(dvokrilna.sirina, dvokrilna.visina);
 
-    if (jeTE) {
-      dvokrilna.cijena =
-        dvokrilna.povrsina *
-        (CijeneVrataTE.dvokrilna[selectedType] || 0);
-    } else if (jeLAS) {
-      dvokrilna.cijena =
-        dvokrilna.povrsina *
-        (CijeneVrataLAS.dvokrilna[selectedType] || 0);
-    }
+    dvokrilna.cijena =
+      dvokrilna.povrsina *
+      ((jeTE ? CijeneVrataTE.dvokrilna[selectedType] : CijeneVrataLAS.dvokrilna[selectedType]) || 0);
   }
 
   /* ---------------- KLIZNA ---------------- */
   let klizna = {
-    aktivno: !!(chkKlizna && chkKlizna.checked),
+    aktivno: chkKlizna?.checked || false,
     duzina: 0,
     visina: 0,
     povrsina: 0,
@@ -394,20 +364,14 @@ function calculate() {
     klizna.visina = parseFloat(kliznaVisina?.value) || 0;
     klizna.povrsina = vrataPovrsina(klizna.duzina, klizna.visina);
 
-    if (jeTE) {
-      klizna.cijena =
-        klizna.povrsina *
-        (CijeneVrataTE.klizna[selectedType] || 0);
-    } else if (jeLAS) {
-      klizna.cijena =
-        klizna.povrsina *
-        (CijeneVrataLAS.klizna[selectedType] || 0);
-    }
+    klizna.cijena =
+      klizna.povrsina *
+      ((jeTE ? CijeneVrataTE.klizna[selectedType] : CijeneVrataLAS.klizna[selectedType]) || 0);
   }
 
   /* ---------------- SAMONOSIVA ---------------- */
   let samonosiva = {
-    aktivno: !!(chkSamonosiva && chkSamonosiva.checked),
+    aktivno: chkSamonosiva?.checked || false,
     duzina: 0,
     visina: 0,
     povrsina: 0,
@@ -419,15 +383,9 @@ function calculate() {
     samonosiva.visina = parseFloat(samonosivaVisina?.value) || 0;
     samonosiva.povrsina = vrataPovrsina(samonosiva.duzina, samonosiva.visina);
 
-    if (jeTE) {
-      samonosiva.cijena =
-        samonosiva.povrsina *
-        (CijeneVrataTE.samonosiva[selectedType] || 0);
-    } else if (jeLAS) {
-      samonosiva.cijena =
-        samonosiva.povrsina *
-        (CijeneVrataLAS.samonosiva[selectedType] || 0);
-    }
+    samonosiva.cijena =
+      samonosiva.povrsina *
+      ((jeTE ? CijeneVrataTE.samonosiva[selectedType] : CijeneVrataLAS.samonosiva[selectedType]) || 0);
   }
 
   /* ---------------------------------------------------------
@@ -484,7 +442,7 @@ function calculate() {
   };
 
   /* ---------------------------------------------------------
-     PRIKAZ REZULTATA
+     PRIKAZ REZULTATA – OGRADA
   --------------------------------------------------------- */
 
   let vrataTekst = "";
@@ -558,7 +516,6 @@ Ukupno: €${ukupno.toFixed(2)}
 
 Napomena kupca: ${kupacNapomenaVal || "—"}
 
-
 Cijena je informativnog karaktera.
 ${Firma.naziv}
 `;
@@ -594,7 +551,7 @@ function calculatePergola() {
 
   const cijenaPovrsine = povrsina * (CijenePergola.m2 || 0);
   const cijenaStupova = stupovi * visinaStupova * (CijenePergola.stup || 0);
-  const cijenaMontaze = kvadratura * (CijeneMontaze[montazaVal] || 0);
+  const cijenaMontaze = povrsina * (CijeneMontaze[montazaVal] || 0);
   const cijenaUdaljenosti = kmVal * CijenaPoKilometru;
 
   let cijenaMotora = 0;
@@ -696,7 +653,7 @@ function calculateNadstresnica() {
 
   const cijenaPovrsine = povrsina * (CijeneNadstresnica.m2 || 0);
   const cijenaStupova = stupovi * visinaStupova * (CijeneNadstresnica.stup || 0);
-  const cijenaMontaze = kvadratura * (CijeneMontaze[montazaVal] || 0);
+  const cijenaMontaze = povrsina * (CijeneMontaze[montazaVal] || 0);
   const cijenaUdaljenosti = kmVal * CijenaPoKilometru;
 
   const osnovica =
@@ -761,7 +718,7 @@ Napomena kupca: ${kupacNapomenaVal || "—"}
 }
 
 /* ---------------------------------------------------------
-   PDF GENERATOR — PDFMAKE (bez linija, kao prije)
+   PDF GENERATOR — PDFMAKE
 --------------------------------------------------------- */
 
 function downloadPDF() {
@@ -825,10 +782,9 @@ function downloadPDF() {
       ["Visina", lastOfferData.visinaVal + " m"],
       ["Površina", lastOfferData.kvadratura.toFixed(2) + " m²"],
       ["Iznos ograde", lastOfferData.iznosOgrade.toFixed(2) + " €"],
-      
     ];
 
-    /* ---------------- VRATA – DETALJNI PRIKAZ ---------------- */
+    /* ---------------- VRATA ---------------- */
 
     if (lastOfferData.jednokrilna?.aktivno) {
       tableBody.push(["Jednokrilna vrata – širina", lastOfferData.jednokrilna.sirina + " m"]);
@@ -858,12 +814,13 @@ function downloadPDF() {
       tableBody.push(["Samonosiva vrata – cijena", lastOfferData.samonosiva.cijena.toFixed(2) + " €"]);
     }
 
+    /* ---------------- RAL / MONTAŽA / UDALJENOST ---------------- */
+
     tableBody.push(["RAL boja", lastOfferData.ralBojaVal]);
     tableBody.push(["Tip montaže", lastOfferData.montazaVal]);
     tableBody.push(["Udaljenost", lastOfferData.kmVal + " km"]);
     tableBody.push(["Montaža", lastOfferData.cijenaMontaze.toFixed(2) + " €"]);
     tableBody.push(["Udaljenost (trošak)", lastOfferData.cijenaUdaljenosti.toFixed(2) + " €"]);
-
   }
 
   /* ---------------------------------------------------------
@@ -878,21 +835,17 @@ function downloadPDF() {
       ["Dužina", lastOfferData.duzina + " m"],
       ["Širina", lastOfferData.sirina + " m"],
       ["Površina", lastOfferData.povrsina.toFixed(2) + " m²"],
+      ["Cijena pergole", lastOfferData.cijenaPovrsine.toFixed(2) + " €"],
       ["Broj stupova", lastOfferData.stupovi],
       ["Visina stupova", lastOfferData.visinaStupova + " m"],
       ["RAL boja", lastOfferData.ralBojaVal],
       ["Tip montaže", lastOfferData.montazaVal],
       ["Udaljenost", lastOfferData.kmVal + " km"],
-      ["Cijena površine", lastOfferData.cijenaPovrsine.toFixed(2) + " €"],
       ["Cijena stupova", lastOfferData.cijenaStupova.toFixed(2) + " €"],
       ["Montaža", lastOfferData.cijenaMontaze.toFixed(2) + " €"],
       ["Udaljenost (trošak)", lastOfferData.cijenaUdaljenosti.toFixed(2) + " €"],
       ["Motor", lastOfferData.pergMotorVal === "sa" ? "DA" : "NE"],
       ["Cijena motora", lastOfferData.cijenaMotora.toFixed(2) + " €"],
-      ["Sažetak iznosa", ""],
-      ["Osnovica:", lastOfferData.osnovica.toFixed(2) + " €"],
-      ["PDV 25%:", lastOfferData.pdv.toFixed(2) + " €"],
-      ["Ukupno:", lastOfferData.ukupno.toFixed(2) + " €"]
     ];
   }
 
@@ -908,19 +861,15 @@ function downloadPDF() {
       ["Dužina", lastOfferData.duzina + " m"],
       ["Širina", lastOfferData.sirina + " m"],
       ["Površina", lastOfferData.povrsina.toFixed(2) + " m²"],
+      ["Cijena nadsrešnice", lastOfferData.cijenaPovrsine.toFixed(2) + " €"],
       ["Broj stupova", lastOfferData.stupovi],
       ["Visina stupova", lastOfferData.visinaStupova + " m"],
       ["RAL boja", lastOfferData.ralBojaVal],
       ["Tip montaže", lastOfferData.montazaVal],
       ["Udaljenost", lastOfferData.kmVal + " km"],
-      ["Cijena površine", lastOfferData.cijenaPovrsine.toFixed(2) + " €"],
       ["Cijena stupova", lastOfferData.cijenaStupova.toFixed(2) + " €"],
       ["Montaža", lastOfferData.cijenaMontaze.toFixed(2) + " €"],
       ["Udaljenost (trošak)", lastOfferData.cijenaUdaljenosti.toFixed(2) + " €"],
-      ["Sažetak iznosa", ""],
-      ["Osnovica:", lastOfferData.osnovica.toFixed(2) + " €"],
-      ["PDV 25%:", lastOfferData.pdv.toFixed(2) + " €"],
-      ["Ukupno:", lastOfferData.ukupno.toFixed(2) + " €"]
     ];
   }
 
@@ -970,19 +919,16 @@ function downloadPDF() {
         layout: {
           hLineColor: '#cccccc',
           vLineColor: '#cccccc',
-          hLineWidth: function () { return 0.7; },
-          vLineWidth: function () { return 0.7; },
-          paddingLeft: function() { return 6; },
-          paddingRight: function() { return 6; },
-          paddingTop: function() { return 4; },
-          paddingBottom: function() { return 4; }
+          hLineWidth: () => 0.7,
+          vLineWidth: () => 0.7,
+          paddingLeft: () => 6,
+          paddingRight: () => 6,
+          paddingTop: () => 4,
+          paddingBottom: () => 4
         }
       },
-            {
-        text: "Sažetak iznosa",
-        style: "sectionTitle",
-        margin: [0, 15, 0, 5]
-      },
+
+      { text: "Sažetak iznosa", style: "sectionTitle", margin: [0, 15, 0, 5] },
 
       {
         table: {
@@ -995,7 +941,6 @@ function downloadPDF() {
         },
         layout: "noBorders"
       },
-
 
       "\n",
 
