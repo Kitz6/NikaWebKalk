@@ -484,6 +484,8 @@ Osnovica: €${osnovica.toFixed(2)}
 PDV 25%: €${pdv.toFixed(2)}
 Ukupno: €${ukupno.toFixed(2)}
 
+Troškovi transporta i montaže nisu uključeni u ponudu!
+
 Napomena: ${kupac.napomena || "—"}
 `;
 
@@ -550,6 +552,8 @@ Osnovica: €${osnovica.toFixed(2)}
 PDV 25%: €${pdv.toFixed(2)}
 Ukupno: €${ukupno.toFixed(2)}
 
+Troškovi transporta i montaže nisu uključeni u ponudu!
+
 Napomena: ${kupac.napomena || "—"}
 `;
 
@@ -612,6 +616,8 @@ Nadstrešnica:
 Osnovica: €${osnovica.toFixed(2)}
 PDV 25%: €${pdv.toFixed(2)}
 Ukupno: €${ukupno.toFixed(2)}
+
+Troškovi transporta i montaže nisu uključeni u ponudu!
 
 Napomena: ${kupac.napomena || "—"}
 `;
@@ -837,3 +843,4 @@ function generatePDF() {
   pdfMake.createPdf(docDefinition).download(`Ponuda_${naslov}.pdf`);
 
 }
+
