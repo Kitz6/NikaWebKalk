@@ -262,7 +262,7 @@ function loadTypes() {
 
     typeGrid.innerHTML += `
       <div class="card" onclick="selectType('${t}')">
-        <img src="img/${t}.webp">
+        <img src="img/${t.toLowerCase()}.webp">
         <h3>${t}</h3>
       </div>`;
   }
