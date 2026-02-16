@@ -822,6 +822,7 @@ function generatePDF() {
       "\n",
 
       { text: "OVO NIJE FISKALIZIRANI RAČUN", italics: true, margin: [0, 10, 0, 0] },
+      { text: "Troškovi transporta i montaže nisu uključeni u ponudu.", italics: true, margin: [0, 10, 0, 0] },
       { text: "Cijena je informativnog karaktera. Za konačnu ponudu pošaljite slike i detalje.", margin: [0, 5, 0, 0] }
     ],
 
@@ -834,4 +835,5 @@ function generatePDF() {
   };
 
   pdfMake.createPdf(docDefinition).download(`Ponuda_${naslov}.pdf`);
+
 }
