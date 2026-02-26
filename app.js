@@ -786,7 +786,7 @@ function generatePDF() {
         stack: [
           "Ime: " + lastOffer.kupac.ime,
           "Adresa: " + lastOffer.kupac.adresa,
-          "Kontakt/Email: " + lastOffer.kupac.kontakt
+          "Kontakt/E-mail: " + lastOffer.kupac.kontakt
         ]
       },
 
@@ -843,6 +843,7 @@ function generatePDF() {
   pdfMake.createPdf(docDefinition).download(`Ponuda_${naslov}.pdf`);
 
 }
+
 
 
 
