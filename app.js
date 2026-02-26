@@ -786,7 +786,7 @@ function generatePDF() {
         stack: [
           "Ime: " + lastOffer.kupac.ime,
           "Adresa: " + lastOffer.kupac.adresa,
-          "OIB: " + lastOffer.kupac.kontakt
+          "Kontakt/Email: " + lastOffer.kupac.kontakt
         ]
       },
 
@@ -829,7 +829,7 @@ function generatePDF() {
 
       { text: "OVO NIJE FISKALIZIRANI RAČUN", italics: true, margin: [0, 10, 0, 0] },
       { text: "Troškovi transporta i montaže nisu uključeni u ponudu.", italics: true, margin: [0, 10, 0, 0] },
-      { text: "Cijena je informativnog karaktera. Za konačnu ponudu pošaljite slike i detalje.", margin: [0, 5, 0, 0] }
+      { text: "Ponuda je informativnog karaktera. Ukoliko Vam navedena cijena odgovara, za izradu obvezujuće ponude pošaljite nam slike i točne mjere prostora na koji se ograda montira. Navedeno molimo poslati na mail: okucnice@nika-konstrukcije.hr", margin: [0, 5, 0, 0] }
     ],
 
     styles: {
@@ -843,4 +843,5 @@ function generatePDF() {
   pdfMake.createPdf(docDefinition).download(`Ponuda_${naslov}.pdf`);
 
 }
+
 
