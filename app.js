@@ -657,8 +657,8 @@ function generatePDF() {
         width: '*',
         alignment: 'right',
         stack: [
-          { text: "NIKA KONSTRUKCIJE", style: "header" },
-          { text: "PONUDA", style: "subheader" },
+          { text: "", style: "header" },
+          { text: "INFORMATIVNA PONUDA", style: "subheader" },
           { text: new Date().toLocaleDateString("hr-HR"), margin: [0, 5, 0, 0] }
         ]
       }
@@ -843,5 +843,6 @@ function generatePDF() {
   pdfMake.createPdf(docDefinition).download(`Ponuda_${naslov}.pdf`);
 
 }
+
 
 
