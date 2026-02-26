@@ -120,7 +120,8 @@ const CijenePergola = {
 
 /* Nadstrešnica */
 const CijeneNadstresnica = { 
-  m2: 260 
+  m2: 260,        // cijena po m² do 10 m²
+  m2Vece: 220     // cijena po m² za površinu iznad 10 m²
 };
 
 /* PDV */
@@ -582,7 +583,12 @@ function calculateNadstresnica() {
     return alert("Unesite sve podatke o kupcu.");
 
   const povrsina = duzina * sirina;
-  const cijenaPovrsine = povrsina * CijeneNadstresnica.m2;
+
+  // Dvostupanjska cijena: do 10 m² jedna cijena, iznad 10 m² druga
+  const pragM2 = 10;
+  const jeVelika = povrsina > pragM2;
+  const cijenaM2 = jeVelika ? CijeneNadstresnica.m2Vece : CijeneNadstresnica.m2;
+  const cijenaPovrsine = povrsina * cijenaM2;
 
   const osnovica = cijenaPovrsine;
   const pdv = osnovica * PDV;
@@ -593,6 +599,8 @@ function calculateNadstresnica() {
     duzina,
     sirina,
     povrsina,
+    cijenaM2,
+    jeVelika,
     cijenaPovrsine,
     osnovica,
     pdv,
@@ -611,6 +619,7 @@ Nadstrešnica:
   Dužina: ${duzina} m
   Širina: ${sirina} m
   Površina: ${povrsina.toFixed(2)} m²
+  Cijena po m²: €${cijenaM2}${jeVelika ? " (cijena za nadstrešnice iznad 10 m²)" : " (cijena za nadstrešnice do 10 m²)"}
   Cijena nadstrešnice: €${cijenaPovrsine.toFixed(2)}
 
 Osnovica: €${osnovica.toFixed(2)}
@@ -753,6 +762,7 @@ function generatePDF() {
     tableBody.push(["Dužina", lastOffer.duzina + " m"]);
     tableBody.push(["Širina", lastOffer.sirina + " m"]);
     tableBody.push(["Površina", lastOffer.povrsina.toFixed(2) + " m2"]);
+    tableBody.push(["Cijena po m²", lastOffer.cijenaM2 + " € " + (lastOffer.jeVelika ? "(iznad 10 m²)" : "(do 10 m²)")]);
     tableBody.push(["Cijena nadstrešnice", lastOffer.cijenaPovrsine.toFixed(2) + " €"]);
   }
 
