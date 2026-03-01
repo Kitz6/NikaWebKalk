@@ -164,3 +164,47 @@ button:hover {
 .hidden {
   display: none;
 }
+
+/* VRATA TOGGLE GUMBI */
+.vrata-chk {
+  display: none;
+}
+
+.vrata-btn {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  background: #f3f4f6;
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+  text-align: left;
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+
+.vrata-btn::before {
+  content: "＋ ";
+  color: #9ca3af;
+  font-weight: 700;
+}
+
+.vrata-btn:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+.vrata-chk:checked + .vrata-btn {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: white;
+}
+
+.vrata-chk:checked + .vrata-btn::before {
+  content: "✓ ";
+  color: white;
+}
