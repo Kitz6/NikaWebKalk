@@ -120,8 +120,8 @@ const CijenePergola = {
 
 /* Nadstrešnica */
 const CijeneNadstresnica = { 
-  m2: 260,        // cijena po m² do praga
-  m2Vece: 220,    // cijena po m² iznad praga
+  m2: 400,        // cijena po m² do praga
+  m2Vece: 260,    // cijena po m² iznad praga
   prag: 5         // prag površine u m²
 };
 
