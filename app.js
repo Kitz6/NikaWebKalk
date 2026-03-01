@@ -135,7 +135,7 @@ const Firma = {
   naziv: "NIKA KONSTRUKCIJE d.o.o.",
   adresa: "Braće Radića 23, 42208 Petrijanec",
   kontakt: "info@nika-konstrukcije.hr",
-  telefon: "+385 042-303-166",
+  telefon: "+385 099/531-2316",
   web: "www.nika-konstrukcije.hr"
 };
 
