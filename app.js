@@ -122,7 +122,7 @@ const CijenePergola = {
 const CijeneNadstresnica = { 
   m2: 260,        // cijena po m² do praga
   m2Vece: 220,    // cijena po m² iznad praga
-  prag: 5         // prag površine u m² (promijenite ovdje)
+  prag: 5         // prag površine u m²
 };
 
 /* PDV */
