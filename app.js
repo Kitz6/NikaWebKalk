@@ -120,8 +120,9 @@ const CijenePergola = {
 
 /* Nadstrešnica */
 const CijeneNadstresnica = { 
-  m2: 260,        // cijena po m² do 5 m²
-  m2Vece: 220     // cijena po m² za površinu iznad 5 m²
+  m2: 260,        // cijena po m² do praga
+  m2Vece: 220,    // cijena po m² iznad praga
+  prag: 5         // prag površine u m² (promijenite ovdje)
 };
 
 /* PDV */
@@ -590,8 +591,8 @@ function calculateNadstresnica() {
 
   const povrsina = duzina * sirina;
 
-  // Dvostupanjska cijena: prag se mijenja ovdje u kodu
-  const pragM2 = 5;
+  // Dvostupanjska cijena: prag se mijenja u konstanti CijeneNadstresnica.prag
+  const pragM2 = CijeneNadstresnica.prag;
   const jeVelika = povrsina > pragM2;
   const cijenaM2 = jeVelika ? CijeneNadstresnica.m2Vece : CijeneNadstresnica.m2;
   const cijenaPovrsine = povrsina * cijenaM2;
