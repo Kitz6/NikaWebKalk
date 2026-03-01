@@ -850,7 +850,8 @@ function generatePDF() {
       { text: "Napomena kupca: " + (lastOffer.kupac.napomena || "—"), margin: [0, 10, 0, 5] },
       { text: "OVO NIJE FISKALIZIRANI RAČUN", italics: true, margin: [0, 10, 0, 0] },
       { text: "Troškovi transporta i montaže nisu uključeni u ponudu.", italics: true, margin: [0, 10, 0, 0] },
-      { text: "Ponuda je informativnog karaktera. Ukoliko Vam navedena cijena odgovara, za izradu obvezujuće ponude pošaljite nam slike i točne mjere prostora montaže. Navedeno molimo poslati na mail: okucnice@nika-konstrukcije.hr", margin: [0, 5, 0, 0] }
+      { text: "Ponuda je informativnog karaktera. Ukoliko Vam navedena cijena odgovara, za izradu obvezujuće ponude pošaljite nam slike i točne mjere prostora montaže.", margin: [0, 5, 0, 0] }
+      { text: "Navedeno molimo poslati na mail: okucnice@nika-konstrukcije.hr", margin: [0, 5, 0, 0] }
     ],
 
     styles: {
