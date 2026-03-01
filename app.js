@@ -183,7 +183,8 @@ const montaza = document.getElementById("montaza");
 
 const kupacIme = document.getElementById("kupacIme");
 const kupacAdresa = document.getElementById("kupacAdresa");
-const kupacKontakt = document.getElementById("kupacOIB");
+const kupacKontakt = document.getElementById("kupacKontakt");
+const kupacEmail = document.getElementById("kupacOIB");
 const kupacNapomena = document.getElementById("kupacNapomena");
 
 const result = document.getElementById("result");
@@ -348,6 +349,7 @@ function calculate() {
     ime: kupacIme.value.trim(),
     adresa: kupacAdresa.value.trim(),
     kontakt: kupacKontakt.value.trim(),
+    email: kupacEmail.value.trim(),
     napomena: kupacNapomena.value.trim()
   };
 
@@ -471,7 +473,8 @@ PONUDA – ${selectedType}
 
 Kupac: ${kupac.ime}
 Adresa: ${kupac.adresa}
-Kontakt: ${kupac.kontakt}
+Kontakt broj: ${kupac.kontakt}
+E-mail: ${kupac.email || "—"}
 
 Ograda:
   Širina: ${sir} m
@@ -507,7 +510,8 @@ function calculatePergola() {
   const kupac = {
     ime: pergKupacIme.value.trim(),
     adresa: pergKupacAdresa.value.trim(),
-    kontakt: pergKupacOIB.value.trim(),
+    kontakt: pergKupacKontakt.value.trim(),
+    email: pergKupacOIB.value.trim(),
     napomena: pergKupacNapomena.value.trim()
   };
 
@@ -540,7 +544,8 @@ PONUDA – PERGOLA
 
 Kupac: ${kupac.ime}
 Adresa: ${kupac.adresa}
-Kontakt: ${kupac.kontakt}
+Kontakt broj: ${kupac.kontakt}
+E-mail: ${kupac.email || "—"}
 
 Pergola:
   Dužina: ${duzina} m
@@ -575,7 +580,8 @@ function calculateNadstresnica() {
   const kupac = {
     ime: nadKupacIme.value.trim(),
     adresa: nadKupacAdresa.value.trim(),
-    kontakt: nadKupacOIB.value.trim(),
+    kontakt: nadKupacKontakt.value.trim(),
+    email: nadKupacOIB.value.trim(),
     napomena: nadKupacNapomena.value.trim()
   };
 
@@ -613,7 +619,8 @@ PONUDA – NADSTREŠNICA
 
 Kupac: ${kupac.ime}
 Adresa: ${kupac.adresa}
-Kontakt: ${kupac.kontakt}
+Kontakt broj: ${kupac.kontakt}
+E-mail: ${kupac.email || "—"}
 
 Nadstrešnica:
   Dužina: ${duzina} m
@@ -796,7 +803,8 @@ function generatePDF() {
         stack: [
           "Ime: " + lastOffer.kupac.ime,
           "Adresa: " + lastOffer.kupac.adresa,
-          "Kontakt/E-mail: " + lastOffer.kupac.kontakt
+          "Kontakt broj: " + lastOffer.kupac.kontakt,
+          "E-mail: " + (lastOffer.kupac.email || "—")
         ]
       },
 
