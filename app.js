@@ -344,7 +344,12 @@ function calculate() {
   const sir = parseFloat(sirina.value) || 0;
   const vis = parseFloat(visina.value) || 0;
 
-  if (!sir || !vis) return alert("Unesite širinu i visinu ograde.");
+  const imaVrata = chkJednokrilna.checked || chkDvokrilna.checked || chkKlizna.checked || chkSamonosiva.checked;
+
+  if (!sir || !vis) {
+    if (!imaVrata) return alert("Unesite širinu i visinu ograde, ili odaberite barem jedna vrata.");
+    // Samo vrata — ograda nije obavezna
+  }
 
   const kupac = {
     ime: kupacIme.value.trim(),
@@ -469,6 +474,14 @@ ${label}:
   addVrata("Klizna vrata", vrata.klizna);
   addVrata("Samonosiva vrata", vrata.samonosiva);
 
+  const ogradaTekst = (sir && vis) ? `Ograda:
+  Širina: ${sir} m
+  Visina: ${vis} m
+  Površina: ${kvadratura.toFixed(2)} m²
+  Iznos ograde: €${iznosOgrade.toFixed(2)}
+
+` : "";
+
   result.textContent = `
 PONUDA – ${selectedType}
 
@@ -477,13 +490,7 @@ Adresa: ${kupac.adresa}
 Kontakt broj: ${kupac.kontakt}
 E-mail: ${kupac.email || "—"}
 
-Ograda:
-  Širina: ${sir} m
-  Visina: ${vis} m
-  Površina: ${kvadratura.toFixed(2)} m²
-  Iznos ograde: €${iznosOgrade.toFixed(2)}
-
-${vrataTekst}
+${ogradaTekst}${vrataTekst}
 
 Osnovica: €${osnovica.toFixed(2)}
 PDV 25%: €${pdv.toFixed(2)}
@@ -706,10 +713,12 @@ function generatePDF() {
 
     tableBody.push(["Tip montaže", lastOffer.montaza]);
 
-    tableBody.push(["Širina ograde", lastOffer.sir + " m"]);
-    tableBody.push(["Visina ograde", lastOffer.vis + " m"]);
-    tableBody.push(["Površina ograde", lastOffer.kvadratura.toFixed(2) + " m2"]);
-    tableBody.push(["Iznos ograde", lastOffer.iznosOgrade.toFixed(2) + " €"]);
+    if (lastOffer.sir && lastOffer.vis) {
+      tableBody.push(["Širina ograde", lastOffer.sir + " m"]);
+      tableBody.push(["Visina ograde", lastOffer.vis + " m"]);
+      tableBody.push(["Površina ograde", lastOffer.kvadratura.toFixed(2) + " m2"]);
+      tableBody.push(["Iznos ograde", lastOffer.iznosOgrade.toFixed(2) + " €"]);
+    }
 
     const V = lastOffer.vrata;
 
