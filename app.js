@@ -635,7 +635,6 @@ Nadstrešnica:
   Dužina: ${duzina} m
   Širina: ${sirina} m
   Površina: ${povrsina.toFixed(2)} m²
-  Cijena po m²: €${cijenaM2}${jeVelika}
   Cijena nadstrešnice: €${cijenaPovrsine.toFixed(2)}
 
 Osnovica: €${osnovica.toFixed(2)}
@@ -667,7 +666,7 @@ function generatePDF() {
   }
 
   /* ---------------------------------------------------------
-     HEADER — kao u tvom PDF-u
+     HEADER
   --------------------------------------------------------- */
 
   const headerBlock = {
@@ -780,7 +779,6 @@ function generatePDF() {
     tableBody.push(["Dužina", lastOffer.duzina + " m"]);
     tableBody.push(["Širina", lastOffer.sirina + " m"]);
     tableBody.push(["Površina", lastOffer.povrsina.toFixed(2) + " m2"]);
-    tableBody.push(["Cijena po m²", lastOffer.cijenaM2 + " € " + (lastOffer.jeVelika)]); 
     tableBody.push(["Cijena nadstrešnice", lastOffer.cijenaPovrsine.toFixed(2) + " €"]);
   }
 
